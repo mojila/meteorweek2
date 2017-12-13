@@ -1,0 +1,92 @@
+<head>
+  <title>Yak</title>
+  <!-- To support mobile-devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+  <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">Yak</a>
+        </div>
+        {{ #if currentUser }}
+          <a class="btn btn-primary pull-right" href="/submit" type="button" style="margin: 10px 0">Send Yak</a>        
+        {{ else }}
+          <a class="btn btn-primary pull-right" href="/login" type="button" style="margin: 10px 0">Login</a>          
+        {{ /if }}
+      </div>
+  </nav>
+</body>
+
+<template name="yaksList">
+  <div class="yaks">
+    <div class="form-style">
+      <div class="container">
+        <h3>Live feed of what people are saying around you</h3>
+        <ul class="list-group">
+          {{#each yaks}}
+            {{> yakItem}}
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="yakItem">
+    <li class="list-group-item" style="margin: 1em 0;">
+      <div class="container-fluid">
+        <div class="pull-left" style="line-height: 2.25em;">
+          <a href="#" class="break-el">{{ yak }}</a>
+        </div>
+        <div class="pull-right">
+            {{ #if currentUser }}
+              <a class="btn btn-success pull-right btn-small yes" style="margin: 0 1em;" href="#"><i class="fa fa-chevron-up"></i></a>
+              <a class="btn btn-default pull-right" href="#" style="margin: 0 1em;"> {{ score }} </a>
+              <a class="btn btn-danger pull-right btn-small no" href="#" style="margin: 0 1em;"><i class="fa fa-chevron-down"></i></a>
+            {{ else }}
+              <a href="/login" class="btn btn-primary">Login</a>
+            {{ /if }}
+        </div>
+      </div>
+    </li>
+</template>
+
+<template name="yaksSubmit">
+    <div class="yaksSubmit">
+      <div class="form-style">
+        <div class="container">
+          <form class="yaksSubmitForm">
+            {{ #if currentUser }}
+              <div class="pull-right">
+                {{> loginButtons}}
+              </div>
+            {{ /if }}
+            <h3>Send yak. It's anonymous</h3>
+            <input autofocus="autofocus" type="text" id="yak" class="yak-form form-control" name="yak" placeholder="Type your yak here"/>
+            <input type="submit" value="Send yak" class="btn btn-primary pull-right" style="margin: 1em 0;">
+          </form>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <template name="accounts">
+      {{#if currentUser}}
+        {{> yaksList}}
+      {{else}}
+      <div class="form-style">
+        <div class="container">
+          <div class="row">
+            <div class="pagination-centered" style="margin-left: 40%;">
+              <h2>Please login to do this</h2>
+              <div class="btn" style="margin-left: 10%;">
+                {{> loginButtons}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{/if}}
+    </template>
