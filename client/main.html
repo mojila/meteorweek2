@@ -11,7 +11,10 @@
           <a class="navbar-brand" href="/">Yak</a>
         </div>
         {{ #if currentUser }}
-          <a class="btn btn-primary pull-right" href="/submit" type="button" style="margin: 10px 0">Send Yak</a>        
+          <div class="pull-right" style="margin: 14px 10px">
+            {{> loginButtons }}
+          </div>
+          <a class="btn btn-primary pull-right" href="/submit" type="button" style="margin: 10px 0">Send Yak</a>                  
         {{ else }}
           <a class="btn btn-primary pull-right" href="/login" type="button" style="margin: 10px 0">Login</a>          
         {{ /if }}
@@ -44,9 +47,7 @@
             {{ #if currentUser }}
               <a class="btn btn-success pull-right btn-small yes" style="margin: 0 1em;" href="#"><i class="fa fa-chevron-up"></i></a>
               <a class="btn btn-default pull-right" href="#" style="margin: 0 1em;"> {{ score }} </a>
-              <a class="btn btn-danger pull-right btn-small no" href="#" style="margin: 0 1em;"><i class="fa fa-chevron-down"></i></a>
-            {{ else }}
-              <a href="/login" class="btn btn-primary">Login</a>
+              <a class="btn btn-danger pull-right btn-small no" href="#" style="margin: 0 1em;"><i class="fa fa-chevron-down"></i></a>            
             {{ /if }}
         </div>
       </div>
@@ -58,12 +59,11 @@
       <div class="form-style">
         <div class="container">
           <form class="yaksSubmitForm">
-            {{ #if currentUser }}
-              <div class="pull-right">
-                {{> loginButtons}}
-              </div>
+            {{ #if currentUser }}              
+              <h3>Send yak</h3>
+            {{ else }}
+              <h3>Send yak. It's anonymous</h3>
             {{ /if }}
-            <h3>Send yak. It's anonymous</h3>
             <input autofocus="autofocus" type="text" id="yak" class="yak-form form-control" name="yak" placeholder="Type your yak here"/>
             <input type="submit" value="Send yak" class="btn btn-primary pull-right" style="margin: 1em 0;">
           </form>
