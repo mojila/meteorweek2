@@ -11,5 +11,8 @@ Meteor.methods({
       score : 0,
       submitted : new Date()
     });
+  },
+  commentInsert: function(comment) {
+    Comments.insert(comment);
   }
 });

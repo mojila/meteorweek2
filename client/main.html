@@ -47,7 +47,8 @@
             {{ #if currentUser }}
               <a class="btn btn-success pull-right btn-small yes" style="margin: 0 1em;" href="#"><i class="fa fa-chevron-up"></i></a>
               <a class="btn btn-default pull-right" href="#" style="margin: 0 1em;"> {{ score }} </a>
-              <a class="btn btn-danger pull-right btn-small no" href="#" style="margin: 0 1em;"><i class="fa fa-chevron-down"></i></a>            
+              <a class="btn btn-danger pull-right btn-small no" href="#" style="margin: 0 1em;"><i class="fa fa-chevron-down"></i></a>
+              <a href="{{ pathFor 'yakPage' }}" class="btn btn-warning">{{ commentsCount }} Komentar</a>
             {{ /if }}
         </div>
       </div>
@@ -90,3 +91,33 @@
       </div>
       {{/if}}
     </template>
+
+<template name="yakPage">
+  <div class="form-style">
+    <div class="container">
+      {{> yakItem}}
+      <div class="comment">
+        <h4>Comments</h4>
+        {{#each comments}}
+          {{> commentItem}}
+        {{/each}}
+      </div>
+      {{> commentSubmit }}
+    </div>
+  </div>
+</template>
+
+<template name="commentItem">
+  <li class="list-group-item">
+    <p class="break-el">{{body}}</p>
+  </li>
+</template>
+
+<template name="commentSubmit">
+  <form name="comment" class="comment-form form">
+    <div class="form-group">
+      <input autofocus="autofocus" name="body" id="body" class="comment-input form-control" placeholder="Comment here">
+      <input type="submit" value="Add comment" class="btn btn-primary" style="margin: 10px 0;">
+    </div>
+  </form>
+</template>
